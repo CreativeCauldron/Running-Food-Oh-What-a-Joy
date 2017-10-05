@@ -2,9 +2,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PlayerController.cs">
     <Files>
-      <File FileName="Assets\PlayerController.cs" Line="27" Column="5" />
-      <File FileName="Assets\PlateControl.cs" Line="33" Column="32" />
-      <File FileName="D:\Jack\Documents\Treasure Hunt\Assets\GameManager.cs" Line="89" Column="69" />
+      <File FileName="Assets\PlayerController.cs" Line="25" Column="28" />
+      <File FileName="Assets\PlateControl.cs" Line="25" Column="4" />
+      <File FileName="Assets\CustomerController.cs" Line="29" Column="29" />
+      <File FileName="D:\Jack\Documents\Treasure Hunt\Assets\GameManager.cs" Line="191" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

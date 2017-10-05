@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (Input.GetKey (KeyCode.Q)) {
-				transform.Rotate (0f, 90f * Time.deltaTime, 0f);
+				transform.Rotate (0f, -90f * Time.deltaTime, 0f);
 		} else if (Input.GetKey (KeyCode.E)){
 				transform.Rotate (0f, 90f * Time.deltaTime, 0f);
 		}
