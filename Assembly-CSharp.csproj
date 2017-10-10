@@ -52,8 +52,11 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CustomerController.cs" />
+     <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\LoseTriggerScript.cs" />
      <Compile Include="Assets\PlateControl.cs" />
      <Compile Include="Assets\PlayerController.cs" />
+     <Compile Include="Assets\WinTrigger.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
