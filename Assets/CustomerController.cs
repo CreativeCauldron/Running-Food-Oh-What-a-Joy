@@ -4,45 +4,48 @@ using UnityEngine;
 
 public class CustomerController : MonoBehaviour {
 
-	public float MaxX;
-	public float MinX;
-	public float MaxZ;
-	public float MinZ;
-	public float XVel;
-	public float ZVel;
-
+	public Vector3 Location1;
+	public Vector3 Location2;
 	public Vector3 Destination;
 	public Vector3 Distance;
 
+	public bool AtLocation = false;
+	public bool DestinationIs1 = true;
+	public bool DestinationIs2 = false;
+
 	// Use this for initialization
 	void Start () {
-		
+		Destination = Location1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Distance = GetComponent<Transform> ().position - Destination;
-	
-		if (Distance.magnitude > 0.001f) {
-			if (Distance.x > 0.001f) {
-				XVel = -5f;
-			} else if (Distance.x < 0.001f) {
-				XVel = 5f;
-			} else {
-				XVel = 0f;
+		if (AtLocation == false) {
+			Distance = GetComponent<Transform> ().position - Destination;
+			if (Distance.magnitude > 0.1f) {
+				if (Distance.x > .001f && Distance.z > 0.001f) {
+					this.transform.Translate (-2f * Time.deltaTime, 0f, -2f * Time.deltaTime);
+				} else if (Distance.x <= 0.001f && Distance.z > 0.001f) {
+					this.transform.Translate (2f * Time.deltaTime, 0f, -2f * Time.deltaTime);
+				} else if (Distance.x > .001f && Distance.z <= 0.001f) {
+					this.transform.Translate (-2f * Time.deltaTime, 0f, 2f * Time.deltaTime);
+				} else if (Distance.x <= 0.001f && Distance.z <= 0.001f) {
+					this.transform.Translate (2f * Time.deltaTime, 0f, 2f * Time.deltaTime);
+				}
+			} else if (Distance.magnitude <= .1f) {
+				AtLocation = true;
 			}
-
-			if (Distance.z > 0.001f) {
-				ZVel = -5f;
-			} else if (Distance.z < 0.001f) {
-				ZVel = 5f;
-			} else {
-				ZVel = 0f;
+		} else if (AtLocation == true) {
+			if (DestinationIs1 == true && DestinationIs2 ==false) {
+				Destination = Location2;
+				DestinationIs1=false;
+				DestinationIs2 = true;
+			} else if (DestinationIs2 == true && DestinationIs1==false) {
+				Destination = Location1;
+				DestinationIs1=true;
+				DestinationIs2 = false;
 			}
-			transform.Translate (ZVel * Time.deltaTime,0f, ZVel * Time.deltaTime);
-
-		} else if (Distance.magnitude >= 0.001f && Distance.magnitude <= 0.001f) {
-			Destination = new Vector3 (Random.Range (MinX, MaxX), GetComponent<Transform> ().position.y, Random.Range (MinZ, MaxZ));
+			AtLocation = false;
 		}
 	}
 }

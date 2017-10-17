@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour {
 	public Vector3 LeftPlates;
 	public Vector3 RightPlates;
 
-	public float TorqueAdjustValue=.04f;
+	public float TorqueAdjustValue=.03f;
 
 	public GameObject FoodOne;
 	public GameObject FoodTwo;
@@ -78,12 +79,18 @@ public class GameManager : MonoBehaviour {
 				InputVector = new Vector3 (0f, 0f, 0f);
 
 				if (Input.GetKeyDown (KeyCode.R)) {
-
+					SceneManager.LoadScene ("Harpoons", LoadSceneMode.Single);
+					GameStarted = false;
 				}
 			}
 		} else if (GameWon == true) {
 			DisplayText.text = "Yeah you did it! Can you do it again?";
 			DisplayText.text = "\n Press R to see if you're right.";
+
+			if (Input.GetKeyDown (KeyCode.R)) {
+				SceneManager.LoadScene ("Harpoons",LoadSceneMode.Single);
+				GameStarted = false;
+			}
 		}
 
 		if (LoseTrigger.GetComponent<LoseTriggerScript> ().GameEndCounter >= 3.0f) {
