@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 	public Vector3 LeftPlates;
 	public Vector3 RightPlates;
 
-	public float TorqueAdjustValue=.03f;
+	public float TorqueAdjustValue=.02f;
 
 	public GameObject FoodOne;
 	public GameObject FoodTwo;
@@ -119,23 +119,51 @@ public class GameManager : MonoBehaviour {
 
 	void PlateControls (){
 		if (Input.GetKey (KeyCode.U)) {
-			LeftPlates.x=LeftPlates.x-TorqueAdjustValue;
+			if (LeftPlates.x > -2.5f) {
+				LeftPlates.x = -2.5f;
+			} else {
+				LeftPlates.x = LeftPlates.x - TorqueAdjustValue;
+			}
 		} else if (Input.GetKey (KeyCode.O)) {
-			LeftPlates.x=LeftPlates.x+TorqueAdjustValue;
+			if (LeftPlates.x < 2.5f) {
+				LeftPlates.x = 2.5f;
+			} else {
+				LeftPlates.x = LeftPlates.x + TorqueAdjustValue;
+			}
 		}
 
 		if (Input.GetKey (KeyCode.J)) {
-			RightPlates.x=RightPlates.x-TorqueAdjustValue;
+			if (RightPlates.x > -2.4f) {
+				RightPlates.x = -2.4f;
+			} else {
+				RightPlates.x = RightPlates.x - TorqueAdjustValue;
+			}
 		} else if (Input.GetKey (KeyCode.L)) {
-			RightPlates.x=RightPlates.x+TorqueAdjustValue;
+			if (RightPlates.x < 2.4f) {
+				RightPlates.x = 2.4f;
+			} else {
+				RightPlates.x = RightPlates.x + TorqueAdjustValue;
+			}
+		}
+
+		if (LeftPlates.x > 5.0f) {
+			LeftPlates.x = 5.0f;
+		} else if (LeftPlates.x < -5.0f) {
+			LeftPlates.x = -5.0f;
+		}
+
+		if (RightPlates.x > 5.0f) {
+			RightPlates.x = 5.0f;
+		} else if (RightPlates.x < -5.0f) {
+			RightPlates.x = -5.0f;
 		}
 	}
 
 	void FixedUpdate (){
-		Player.GetComponent<Rigidbody> ().velocity = InputVector * 7f+Physics.gravity*0.1f;
+		Player.GetComponent<Rigidbody> ().velocity = InputVector * 11f+Physics.gravity*0.1f;
 
-		plateOne.GetComponent<ConstantForce> ().torque = LeftPlates;
-		plateTwo.GetComponent<ConstantForce> ().torque = LeftPlates;
-		plateThree.GetComponent<ConstantForce> ().torque = RightPlates;
+		plateOne.GetComponent<ConstantForce> ().relativeTorque = LeftPlates;
+		plateTwo.GetComponent<ConstantForce> ().relativeTorque = LeftPlates;
+		plateThree.GetComponent<ConstantForce> ().relativeTorque = RightPlates;
 	}
 }

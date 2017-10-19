@@ -13,9 +13,14 @@ public class CustomerController : MonoBehaviour {
 	public bool DestinationIs1 = true;
 	public bool DestinationIs2 = false;
 
+	public Vector3 Facing1;
+	public Vector3 Facing2;
+
+	public GameObject Sprite;
 	// Use this for initialization
 	void Start () {
 		Destination = Location1;
+		Sprite.GetComponent<Transform> ().eulerAngles = Facing1;
 	}
 	
 	// Update is called once per frame
@@ -38,12 +43,14 @@ public class CustomerController : MonoBehaviour {
 		} else if (AtLocation == true) {
 			if (DestinationIs1 == true && DestinationIs2 ==false) {
 				Destination = Location2;
-				DestinationIs1=false;
+				Sprite.GetComponent<Transform> ().eulerAngles = Facing2;
+				DestinationIs1 = false;
 				DestinationIs2 = true;
 			} else if (DestinationIs2 == true && DestinationIs1==false) {
 				Destination = Location1;
 				DestinationIs1=true;
 				DestinationIs2 = false;
+				Sprite.GetComponent<Transform> ().eulerAngles = Facing1;
 			}
 			AtLocation = false;
 		}
