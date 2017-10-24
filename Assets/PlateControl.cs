@@ -4,39 +4,47 @@ using UnityEngine;
 
 public class PlateControl : MonoBehaviour {
 
-	public GameObject plateOne;
-	public GameObject plateTwo;
-	public GameObject plateThree;
-
-	public Vector3 LeftPlates;
-	public Vector3 RightPlates;
-
-	public float TorqueAdjustValue=.05f;
+	Rigidbody ThisBody;
+	bool XPosOn;
+	bool ZPosOn;
 
 	// Use this for initialization
 	void Start () {
-		LeftPlates = new Vector3 (0f, 0f, 0f);
-		RightPlates = new Vector3 (0f, 0f, 0f);
+		ThisBody = this.GetComponent<Rigidbody> ();
+		ThisBody.constraints = RigidbodyConstraints.FreezeRotationY;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.U)) {
-			LeftPlates.x=LeftPlates.x-TorqueAdjustValue;
-		} else if (Input.GetKey (KeyCode.O)) {
-			LeftPlates.x=LeftPlates.x+TorqueAdjustValue;
+		if (this.GetComponent<Transform> ().eulerAngles.x <= 25f) {
+			XPosOn = true;
+		}else if (this.GetComponent<Transform>().eulerAngles.x >= 335f) {
+			XPosOn = true;
+		}else if (this.GetComponent<Transform> ().eulerAngles.x > 25f) {
+			XPosOn = false;
+		} else if (this.GetComponent<Transform> ().eulerAngles.x < -25f) {
+			XPosOn = false;
 		}
 
-		if (Input.GetKey (KeyCode.J)) {
-			RightPlates.x=RightPlates.x-TorqueAdjustValue;
-		} else if (Input.GetKey (KeyCode.L)) {
-			RightPlates.x=RightPlates.x+TorqueAdjustValue;
+		if (this.GetComponent<Transform> ().eulerAngles.z <= 25f) {
+			ZPosOn = true;
+		}else if (this.GetComponent<Transform>().eulerAngles.z >= 335f) {
+			ZPosOn = true;
+		}else if (this.GetComponent<Transform> ().eulerAngles.z > 25f) {
+			ZPosOn = false;
+		} else if (this.GetComponent<Transform> ().eulerAngles.z < -25f) {
+			ZPosOn = false;
+		}
+
+		if (XPosOn == true && ZPosOn == true) {
+			ThisBody.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+		} else if (XPosOn == true && ZPosOn == false) {
+			ThisBody.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+		} else if (XPosOn == false && ZPosOn == true) {
+			ThisBody.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionX;
+		} else if (XPosOn == false && ZPosOn == false) {
+			ThisBody.constraints = RigidbodyConstraints.FreezeRotationY;
 		}
 	}
 
-	void FixedUpdate (){
-		plateOne.GetComponent<ConstantForce> ().torque = LeftPlates;
-		plateTwo.GetComponent<ConstantForce> ().torque = LeftPlates;
-		plateThree.GetComponent<ConstantForce> ().torque = RightPlates;
-	}
 }

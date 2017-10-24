@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\CustomerController.cs" />
      <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\GoalArrowBob.cs" />
      <Compile Include="Assets\LoseTriggerScript.cs" />
      <Compile Include="Assets\PlateControl.cs" />
      <Compile Include="Assets\PlayerController.cs" />

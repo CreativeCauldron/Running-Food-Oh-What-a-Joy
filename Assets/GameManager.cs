@@ -25,21 +25,26 @@ public class GameManager : MonoBehaviour {
 	public Vector3 LeftPlates;
 	public Vector3 RightPlates;
 
-	public float TorqueAdjustValue=.02f;
+	public float TorqueAdjustValue=.05f;
 
-	public GameObject FoodOne;
-	public GameObject FoodTwo;
-	public GameObject FoodThree;
-	public GameObject FoodFour;
-	public GameObject FoodFive;
-	public GameObject FoodSix;
+	public float GravityMult;
 
-	Vector3 FoodOnePos;
-	Vector3 FoodTwoPos;
-	Vector3 FoodThrePos;
-	Vector3 FoodFourPos;
-	Vector3 FoodFivePos;
-	Vector3 FoodSixPos;
+//	public GameObject FoodOne;
+//	public GameObject FoodTwo;
+//	public GameObject FoodThree;
+//	public GameObject FoodFour;
+//	public GameObject FoodFive;
+//	public GameObject FoodSix;
+//
+//	Vector3 FoodOnePos;
+//	Vector3 FoodTwoPos;
+//	Vector3 FoodThrePos;
+//	Vector3 FoodFourPos;
+//	Vector3 FoodFivePos;
+//	Vector3 FoodSixPos;
+
+	public Text LeftArmHint;
+	public Text RightArmHint;
 
 	// Use this for initialization
 	void Start () {
@@ -57,12 +62,19 @@ public class GameManager : MonoBehaviour {
 			if (GameStarted == false && GameOver == false) {
 				DisplayText.text = "Welcome to the Game";
 				DisplayText.text += "\n When ready press space to start";
-				DisplayText.text += "\n Use WASD to move, QE will rotate your character";
-				DisplayText.text += "\n Use UO to control the plates on the left";
-				DisplayText.text += "\n Use JL to control the plates on the right";
+				DisplayText.text += "\n Use WASD to move, QE will turn";
+				DisplayText.text += "\n Hold Down UO to rotate the plates on the left";
+				DisplayText.text += "\n Hold Down JL to rotate the plates on the right";
+
+				LeftArmHint.text = " ";
+				RightArmHint.text = " ";
+
 
 				if (Input.GetKeyDown (KeyCode.Space)) {
 					GameStarted = true;
+
+					LeftArmHint.text = "<U-O>";
+					RightArmHint.text = "<J-L>";
 
 					plateOne.GetComponent<Rigidbody> ().isKinematic = false;
 					plateTwo.GetComponent<Rigidbody> ().isKinematic = false;
@@ -85,7 +97,9 @@ public class GameManager : MonoBehaviour {
 			}
 		} else if (GameWon == true) {
 			DisplayText.text = "Yeah you did it! Can you do it again?";
-			DisplayText.text = "\n Press R to see if you're right.";
+			DisplayText.text += "\n Press R to see if you're right.";
+
+			InputVector = new Vector3 (0f, 0f, 0f);
 
 			if (Input.GetKeyDown (KeyCode.R)) {
 				SceneManager.LoadScene ("Harpoons",LoadSceneMode.Single);
@@ -119,28 +133,28 @@ public class GameManager : MonoBehaviour {
 
 	void PlateControls (){
 		if (Input.GetKey (KeyCode.U)) {
-			if (LeftPlates.x > -2.5f) {
-				LeftPlates.x = -2.5f;
+			if (LeftPlates.x > -2.8f) {
+				LeftPlates.x = -2.8f;
 			} else {
 				LeftPlates.x = LeftPlates.x - TorqueAdjustValue;
 			}
 		} else if (Input.GetKey (KeyCode.O)) {
-			if (LeftPlates.x < 2.5f) {
-				LeftPlates.x = 2.5f;
+			if (LeftPlates.x < 2.8f) {
+				LeftPlates.x = 2.8f;
 			} else {
 				LeftPlates.x = LeftPlates.x + TorqueAdjustValue;
 			}
 		}
 
 		if (Input.GetKey (KeyCode.J)) {
-			if (RightPlates.x > -2.4f) {
-				RightPlates.x = -2.4f;
+			if (RightPlates.x > -2.8f) {
+				RightPlates.x = -2.8f;
 			} else {
 				RightPlates.x = RightPlates.x - TorqueAdjustValue;
 			}
 		} else if (Input.GetKey (KeyCode.L)) {
-			if (RightPlates.x < 2.4f) {
-				RightPlates.x = 2.4f;
+			if (RightPlates.x < 2.8f) {
+				RightPlates.x = 2.8f;
 			} else {
 				RightPlates.x = RightPlates.x + TorqueAdjustValue;
 			}

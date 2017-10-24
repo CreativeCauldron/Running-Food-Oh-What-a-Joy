@@ -27,7 +27,7 @@ public class CustomerController : MonoBehaviour {
 	void Update () {
 		if (AtLocation == false) {
 			Distance = GetComponent<Transform> ().position - Destination;
-			if (Distance.magnitude > 0.1f) {
+			if (Distance.magnitude > 0.5f) {
 				if (Distance.x > .001f && Distance.z > 0.001f) {
 					this.transform.Translate (-2f * Time.deltaTime, 0f, -2f * Time.deltaTime);
 				} else if (Distance.x <= 0.001f && Distance.z > 0.001f) {
@@ -37,7 +37,7 @@ public class CustomerController : MonoBehaviour {
 				} else if (Distance.x <= 0.001f && Distance.z <= 0.001f) {
 					this.transform.Translate (2f * Time.deltaTime, 0f, 2f * Time.deltaTime);
 				}
-			} else if (Distance.magnitude <= .1f) {
+			} else if (Distance.magnitude <= .5f) {
 				AtLocation = true;
 			}
 		} else if (AtLocation == true) {
