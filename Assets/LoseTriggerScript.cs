@@ -29,5 +29,9 @@ public class LoseTriggerScript : MonoBehaviour {
 			Destroy(EnterObject.gameObject);
 			ThirdSource.Play ();
 		}
+
+		if (EnterObject.name == "Test Food 1" || EnterObject.name == "Test Food 2" || EnterObject.name == "Test Food 3" || EnterObject.name == "Test Food 4" || EnterObject.name == "Test Food 5" || EnterObject.name == "Test Food 6") {
+			Destroy (EnterObject.gameObject);
+		}
 	}
 }

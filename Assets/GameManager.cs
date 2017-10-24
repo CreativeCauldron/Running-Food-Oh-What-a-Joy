@@ -27,22 +27,6 @@ public class GameManager : MonoBehaviour {
 
 	public float TorqueAdjustValue=.05f;
 
-	public float GravityMult;
-
-//	public GameObject FoodOne;
-//	public GameObject FoodTwo;
-//	public GameObject FoodThree;
-//	public GameObject FoodFour;
-//	public GameObject FoodFive;
-//	public GameObject FoodSix;
-//
-//	Vector3 FoodOnePos;
-//	Vector3 FoodTwoPos;
-//	Vector3 FoodThrePos;
-//	Vector3 FoodFourPos;
-//	Vector3 FoodFivePos;
-//	Vector3 FoodSixPos;
-
 	public Text LeftArmHint;
 	public Text RightArmHint;
 
@@ -133,28 +117,28 @@ public class GameManager : MonoBehaviour {
 
 	void PlateControls (){
 		if (Input.GetKey (KeyCode.U)) {
-			if (LeftPlates.x > -2.8f) {
-				LeftPlates.x = -2.8f;
+			if (LeftPlates.x > -2.5f) {
+				LeftPlates.x = -2.5f;
 			} else {
 				LeftPlates.x = LeftPlates.x - TorqueAdjustValue;
 			}
 		} else if (Input.GetKey (KeyCode.O)) {
-			if (LeftPlates.x < 2.8f) {
-				LeftPlates.x = 2.8f;
+			if (LeftPlates.x < 2.5f) {
+				LeftPlates.x = 2.5f;
 			} else {
 				LeftPlates.x = LeftPlates.x + TorqueAdjustValue;
 			}
 		}
 
 		if (Input.GetKey (KeyCode.J)) {
-			if (RightPlates.x > -2.8f) {
-				RightPlates.x = -2.8f;
+			if (RightPlates.x > -2.5f) {
+				RightPlates.x = 2.5f;
 			} else {
 				RightPlates.x = RightPlates.x - TorqueAdjustValue;
 			}
 		} else if (Input.GetKey (KeyCode.L)) {
-			if (RightPlates.x < 2.8f) {
-				RightPlates.x = 2.8f;
+			if (RightPlates.x < 2.5f) {
+				RightPlates.x = 2.5f;
 			} else {
 				RightPlates.x = RightPlates.x + TorqueAdjustValue;
 			}
